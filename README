@@ -1,6 +1,7 @@
 Geocoded Autocomplete
 Written by: Lorenz Sell | @lorenzsell | lorenz.sell@gmail.com
 With inspiration from: http://tech.cibul.org/geocode-with-google-maps-api-v3/
+Demo: http://fromwith.in/projects/Geocoded-Autocomplete/geocoder.html
 
 This plugin used Google Maps API v3 to extend the jQuery UI 1.8 Autocomplete widget to provide geocoded autocomplete suggestions with an interactive map.
 
