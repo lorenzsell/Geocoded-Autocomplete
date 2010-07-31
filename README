@@ -1,0 +1,22 @@
+Geocoded Autocomplete
+Written by: Lorenz Sell | @lorenzsell | lorenz.sell@gmail.com
+With inspiration from: http://tech.cibul.org/geocode-with-google-maps-api-v3/
+
+This plugin used Google Maps API v3 to extend the jQuery UI 1.8 Autocomplete widget to provide geocoded autocomplete suggestions with an interactive map.
+
+Required:
+
+#mapwindow - this is where the Google Map will load
+#mapframe - this contains the window that loads the Google Map.  I couldn't get the z-index to work properly when applied directly to the mapwindow, that's why there's the extra mark up
+#mapaddress - this is the address string to be geocoded
+
+Optional:
+
+(I usually hide these two fields through CSS and reference them programatically)
+#filter_lat - geocoded lat results returned from Google
+filter_lng - geocoded lnt results returned from Google
+
+
+Notes:
+
+Everything can be custom themed from the CSS file EXCEPT FOR the menu item width which is set in the main .js file.
