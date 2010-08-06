@@ -10,6 +10,8 @@
     var geocoder;
     var map;
     var marker;
+    
+    // set this to true if you want US only results
     var US_only = false;
     
     // set plugin options
