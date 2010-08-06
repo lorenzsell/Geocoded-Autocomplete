@@ -10,6 +10,7 @@
     var geocoder;
     var map;
     var marker;
+    var US_only = false;
     
     // set plugin options
     var map_frame_id;
@@ -26,7 +27,7 @@
         autogeocomplete: function(options){
         
             // extend plugin options            
-            var options = $.extend($.fn.autogeocomplete.defaults, options);
+            options = $.extend({}, $.fn.autogeocomplete.defaults, options);
             map_window_id = options.map_window_id;
             map_frame_id = options.map_frame_id;
             lat_id = options.lat_id;
@@ -49,19 +50,25 @@
                         var item_count = 0;
                         
                         // limit to US only results
-                        var US_results = [];
-                        $.each(results, function(item){
-                            if(results[item].formatted_address.toLowerCase().indexOf(", usa") !== -1)
-                            {
-                                US_results.push(results[item]);
-                            }
-                        });
-                        
+                        var filter_results = [];
+                       
+                        if(US_only){
+                            $.each(results, function(item){
+                                if(results[item].formatted_address.toLowerCase().indexOf(", usa") !== -1)
+                                {
+                                    filter_results.push(results[item]);
+                                }
+                            });
+                        }
+                        else{
+                            filter_results = results;
+                        }
+
                         // default render map to top result
-                        setMap(US_results[0].geometry.location.lat(), US_results[0].geometry.location.lng());
+                        setMap(filter_results[0].geometry.location.lat(), filter_results[0].geometry.location.lng());
                         
                         // parse and format returned suggestions
-                        response($.map(US_results, function(item) {
+                        response($.map(filter_results, function(item) {
                         
                             // split returned string
                             var place_parts = item.formatted_address.split(",");
