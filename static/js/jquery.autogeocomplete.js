@@ -46,7 +46,7 @@
             
                 // fetch address values
                 source: function(request, response) {
-                    geocoder.geocode( {'address': request.term, 'region': 'US' }, function(results, status) {
+                    geocoder.geocode( {'address': request.term}, function(results, status) {
                         
                         // limit number of returned values to top 5
                         var item_count = 0;
