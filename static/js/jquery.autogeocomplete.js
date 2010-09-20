@@ -19,6 +19,7 @@
     var map_window_id;
     var lat_id;
     var lng_id;
+    var addr_id;
     var lat;
     var lng;
     var map_zoom;
@@ -34,6 +35,7 @@
             map_frame_id = options.map_frame_id;
             lat_id = options.lat_id;
             lng_id = options.lng_id;
+            addr_id = options.addr_id;
             lat = options.lat;
             lng = options.lng;
             map_zoom = options.map_zoom;   
@@ -108,6 +110,9 @@
                 // set map to visible when autosuggester is activated
                 open: function(event, ui){
                     $("#" + map_frame_id).css("visibility", "visible");
+                    $("#" + map_frame_id).css("z-index", "5");
+                    $("#" + map_window_id).css("z-index", "5");
+                    $(".ui-autocomplete").css("z-index", "-1");
                     
                     // hard coded css width in javascript to avoid editing jQuery css files
                     $('.ui-menu-item').css("width", "200px");
@@ -148,13 +153,38 @@
                 center: latlng,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 scaleControl : false,
-                mapTypeControl : false,
+                mapTypeControl : false
             }
             map = new google.maps.Map(document.getElementById(map_window_id), myOptions); 
             marker = new google.maps.Marker({
                 map: map,
                 draggable: false
             }); 
+            
+            google.maps.event.addListener(map, 'click', function(event){
+            
+                // put the lat and lng values in the input boxes
+                $("#" + lat_id).val(event.latLng.b);
+                $("#" + lng_id).val(event.latLng.c);
+                
+                // set marker position to event click
+                var marker_position = event.latLng;
+                
+                // create new marker
+                var newMarker = new google.maps.Marker({
+                    map: map,
+                    draggable: false,
+                    position: marker_position
+                });
+                
+                // create a new geocode object to reverse geocode click position
+                var reversegeocoder = new google.maps.Geocoder();
+                
+                // geocoder returns an array or nearest matching address, take the first result and put it in the relevant drop down box 
+                reversegeocoder.geocode({ 'latLng': event.latLng }, function(results, status){
+                    $("#" + addr_id).val(results[0].formatted_address);
+                });        
+            });
         }
             
     });
@@ -165,9 +195,10 @@
         map_window_id: "mapwindow",
         lat_id: "filter_lat",
         lng_id: "filter_lng",
+        addr_id: "filter_address",
         lat: "37.7749295",
         lng: "-122.4194155",
-        map_zoom: 13, 
+        map_zoom: 13 
     };
     
 })(jQuery);

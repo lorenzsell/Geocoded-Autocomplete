@@ -19,9 +19,10 @@
                 map_window_id: "mapwindow",
                 lat_id: "filter_lat",
                 lng_id: "filter_lng",
+                addr_id: "filter_address",
                 lat: "37.7749295",
                 lng: "-122.4194155",
-                map_zoom: 13, 
+                map_zoom: 13 
             }
 			
             $('#mapaddress').autogeocomplete(options);
@@ -38,13 +39,14 @@
         <label for="mapaddress">Address</label>
         <input type=text id="mapaddress" />
         <div id="mapframe"><div id="mapwindow"></div></div>
-        
-        <br><br>
+    </div>
         <label for="filter_lat">Lat:</label>
         <input type="text" id="filter_lat" />
-        <br>
+        <br />
         <label for="filter_lng">Lng:</label>
         <input type="text" id="filter_lng" />
-    </div>
+        <br />
+        <label for="filter_address">Address:</label>
+        <input type="text" id="filter_address" />
     </body>
 </html>
