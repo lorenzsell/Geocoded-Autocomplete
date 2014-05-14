@@ -170,13 +170,8 @@
                 // set marker position to event click
                 var marker_position = event.latLng;
                 
-                // create new marker
-                var newMarker = new google.maps.Marker({
-                    map: map,
-                    draggable: false,
-                    position: marker_position
-                });
-                
+                marker.setPosition(marker_position);
+
                 // create a new geocode object to reverse geocode click position
                 var reversegeocoder = new google.maps.Geocoder();
                 
